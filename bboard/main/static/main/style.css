@@ -1,0 +1,117 @@
+/* Фон страницы */
+body {
+  background: #f6f7fb;
+}
+
+
+.brand-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: #111;
+}
+
+.site-header .container-fluid {
+  background:
+    url("bg.jpg") left / auto 100% no-repeat,
+
+}
+
+
+
+/* Заголовки рубрик */
+.root {
+  font-weight: 600;
+  color: #6c757d;
+}
+
+
+img.main-image { width: 300px; }
+img.additional-image { width: 180px; }
+
+
+
+
+:root{
+  --c-green: #00833E;
+  --c-orange:#FF6A00;
+  --c-red:   #D6001C;
+  --bg: #F6F7FB;
+  --card: #ffffff;
+  --text: #1f2937;
+}
+
+body.container-fluid{
+  background: var(--bg);
+}
+
+/* ===== HEADER ===== */
+.site-header{
+  background: var(--card);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.brand-logo{
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.brand-title{
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: .2px;
+
+  /* "Объявления" чуть правее: отступ от логотипа */
+  margin-left: 8px;
+}
+
+.brand-stripe{
+  height: 6px;
+  background: linear-gradient(90deg,
+    var(--c-green) 0%,
+    var(--c-green) 33%,
+    var(--c-orange) 33%,
+    var(--c-orange) 66%,
+    var(--c-red) 66%,
+    var(--c-red) 100%);
+}
+
+/* ===== SIDEBAR + CONTENT ===== */
+.sidebar{
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+.sidebar-title{
+  font-weight: 700;
+  color: var(--c-green);
+  margin: 10px 0 6px;
+}
+
+.sidebar-link{
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.sidebar-link:hover{
+  background: rgba(0,131,62,.08);
+  color: var(--text);
+}
+
+.content-card{
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+  border: 1px solid rgba(0,0,0,.05);
+}
+
+/* Картинки объявлений */
+img.main-image { width: 300px; border-radius: 10px; }
+img.additional-image { width: 180px; border-radius: 10px; }

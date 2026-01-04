@@ -1,0 +1,99 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Главная{% endblock %} - Доска объявлений</title>
+
+    {% bootstrap_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+    {% bootstrap_javascript %}
+</head>
+
+<body class="container-fluid">
+
+<header class="site-header mb-3">
+  <div class="container-fluid py-3">
+    <div class="d-flex align-items-center justify-content-between gap-3">
+      <a class="brand d-flex align-items-center gap-3 text-decoration-none"
+         href="{% url 'main:index' %}">
+        <img class="brand-logo" src="{% static 'main/bg.jpg' %}" alt="7/11">
+        <span class="brand-title">Объявления</span>
+      </a>
+
+      <div class="d-flex align-items-center gap-2">
+        {% if user.is_authenticated %}
+          <div class="dropdown">
+            <a class="btn btn-outline-secondary dropdown-toggle"
+               data-bs-toggle="dropdown" href="#">
+              Профиль
+            </a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a class="dropdown-item" href="{% url 'main:profile' %}">Мои объявления</a>
+              <a class="dropdown-item" href="{% url 'main:profile_edit' %}">Изменить личные данные</a>
+              <a class="dropdown-item" href="{% url 'main:password_edit' %}">Изменить пароль</a>
+              <a class="dropdown-item" href="{% url 'main:mail_filters' %}">Фильтры писем</a>
+              <hr class="dropdown-divider">
+
+              <form class="px-3" method="post" action="{% url 'main:logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-danger w-100" type="submit">Выйти</button>
+              </form>
+
+              <hr class="dropdown-divider">
+              <a class="dropdown-item text-danger" href="{% url 'main:profile_delete' %}">Удалить</a>
+            </div>
+          </div>
+        {% else %}
+          <a class="btn btn-outline-primary" href="{% url 'main:register' %}">Регистрация</a>
+          <a class="btn btn-primary" href="{% url 'main:login' %}">Вход</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Цветная полоса в стиле 7/11 -->
+  <div class="brand-stripe"></div>
+</header>
+
+<div class="container-fluid">
+    <div class="row g-3">
+        <aside class="col-12 col-md-3 col-lg-2">
+            <div class="sidebar p-3">
+                <a class="sidebar-link fw-semibold" href="{% url 'main:index' %}">Главная</a>
+                <hr class="my-2">
+
+                {% for rubric in rubrics %}
+                    {% ifchanged rubric.super_rubric.pk %}
+                        <div class="sidebar-title mt-2">{{ rubric.super_rubric.name }}</div>
+                    {% endifchanged %}
+
+                    <a class="sidebar-link" href="{% url 'main:rubric_bbs' pk=rubric.pk %}">
+                        {{ rubric.name }}
+                    </a>
+                {% endfor %}
+
+                <hr class="my-3">
+                <a class="sidebar-link" href="{% url 'main:other' page='about' %}">О сайте</a>
+            </div>
+        </aside>
+
+        <main class="col-12 col-md-9 col-lg-10">
+            <div class="content-card p-3 p-md-4">
+                {% bootstrap_messages %}
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+</div>
+
+<footer class="mt-3 mb-3">
+    <p class="text-end fst-italic mb-0">&copy; Юшкова М.Е.</p>
+</footer>
+
+</body>
+</html>
+
