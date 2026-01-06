@@ -151,7 +151,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # -------------------------
 # Auth
-
+
 # -------------------------
 AUTH_USER_MODEL = 'main.AdvUser'
 LOGOUT_REDIRECT_URL = 'main:index'
